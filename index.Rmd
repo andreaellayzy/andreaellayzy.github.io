@@ -1,19 +1,17 @@
 ---
-title: "Tobi Burns"
-image: "tobi.jpg"
+title: "Ziying Yang"
+image: "Ziying.jpeg"
 links:
   - label: LinkedIn
-    url: "https://linkedin.com/"
-  - label: Twitter
-    url: "https://twitter.com/"
+    url: "https://www.linkedin.com/in/ella-ziying-yang/"
   - label: GitHub
-    url: "https://github.com/"
+    url: "https://github.com/andreaellayzy"
   - label: Email
-    url: "mailto:email@email.com"
+    url: "ziyingyang76@gmail.com"
 output:
   postcards::jolla
 ---
  
-I am a classically trained data scientist living in the San Francisco Bay Area. 
-Currently I work on the Oculus team at Facebook. I love talking about baseball, 
-true crime podcasts, and causal inference.
+I am a photographer, traveler, and an incoming Data Scientist. I am a Manchurian from Anshan, Northeast China. I also lived in Shanghai, New York, and Berlin before. Currently I am living in Baltimore. 
+
+I am a first-year ScM Biostatistics student at Johns Hopkins School of Public Health. I graduated from New York University with a bachelor in Social Science (Sociology) and a Bachelor in Data Science (Finance) in Spring 2023.
