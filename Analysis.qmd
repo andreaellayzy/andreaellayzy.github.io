@@ -1,5 +1,21 @@
 ---
 title: "Example Analysis"
+author:
+  - name: Ziying Yang
+description: "Exploring relationship between rainfall and temperature"
+bibliography: References.bib
 ---
 
-## Data Description
+## Research Question
+
+Measles is an extremely contagious and airborne disease caused by a virus, it poses a grave threat to young children and often leads to severe complications and fatalities. The advent of measles vaccination has been instrumental in preventing 56 million deaths between 2000 and 2021 [@who]. Despite the existence of a safe and cost-effective vaccine, in 2021, there is still an alarming estimated global count of 128,000 measles-related deaths, predominantly affecting children under the age of 5, among them, most were either unvaccinated or inadequately vaccinated [@who]. Measles can lead to severe consequences, including death, remains a significant concern. Pregnant women who lack vaccination are also susceptible [@who].
+
+Here is some epidemiological background about measles:
+
+![](measle_info.jpeg)
+
+Here is a general review about the effect of vaccination related to measles:
+
+![](vaccination1.jpeg)
+
+## References

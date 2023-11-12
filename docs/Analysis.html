@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ziying Yang">
+<meta name="description" content="Exploring relationship between rainfall and temperature">
 
 <title>Stats_Paradigm_Project1_Ziying - Example Analysis</title>
 <style>
@@ -20,7 +22,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -109,7 +130,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-description" id="toc-data-description" class="nav-link active" data-scroll-target="#data-description">Data Description</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link active" data-scroll-target="#research-question">Research Question</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -121,10 +143,21 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">Example Analysis</h1>
 </div>
 
+<div>
+  <div class="description">
+    Exploring relationship between rainfall and temperature
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ziying Yang </p>
+          </div>
+  </div>
     
   
     
@@ -133,13 +166,26 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="data-description" class="level2">
-<h2 class="anchored" data-anchor-id="data-description">Data Description</h2>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
+<p>Measles is an extremely contagious and airborne disease caused by a virus, it poses a grave threat to young children and often leads to severe complications and fatalities. The advent of measles vaccination has been instrumental in preventing 56 million deaths between 2000 and 2021 <span class="citation" data-cites="who">(<a href="#ref-who" role="doc-biblioref">World Health Organization 2023</a>)</span>. Despite the existence of a safe and cost-effective vaccine, in 2021, there is still an alarming estimated global count of 128,000 measles-related deaths, predominantly affecting children under the age of 5, among them, most were either unvaccinated or inadequately vaccinated <span class="citation" data-cites="who">(<a href="#ref-who" role="doc-biblioref">World Health Organization 2023</a>)</span>. Measles can lead to severe consequences, including death, remains a significant concern. Pregnant women who lack vaccination are also susceptible <span class="citation" data-cites="who">(<a href="#ref-who" role="doc-biblioref">World Health Organization 2023</a>)</span>.</p>
+<p>Here is some epidemiological background about measles:</p>
+<p><img src="measle_info.jpeg" class="img-fluid"></p>
+<p>Here is a general review about the effect of vaccination related to measles:</p>
+<p><img src="vaccination1.jpeg" class="img-fluid"></p>
+</section>
+<section id="references" class="level2">
+
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-who" class="csl-entry" role="listitem">
+World Health Organization. 2023. <span>“Measles Fact Sheet.”</span> <a href="https://www.who.int/news-room/fact-sheets/detail/measles" class="uri">https://www.who.int/news-room/fact-sheets/detail/measles</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
