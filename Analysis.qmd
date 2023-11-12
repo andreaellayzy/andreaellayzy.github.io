@@ -2,7 +2,7 @@
 title: "Example Analysis"
 author:
   - name: Ziying Yang
-description: "Exploring relationship between rainfall and temperature"
+description: "Investigating Disparities in Measles Vaccination Coverage and Measles Incidence"
 bibliography: References.bib
 ---
 
@@ -12,10 +12,232 @@ Measles is an extremely contagious and airborne disease caused by a virus, it po
 
 Here is some epidemiological background about measles:
 
-![](measle_info.jpeg)
+![](measle_info.jpg)
+
+[@owid_vaccination]
 
 Here is a general review about the effect of vaccination related to measles:
 
-![](vaccination1.jpeg)
+![](vaccination1.jpg)
+
+[@mmwr2018]
+
+There exists huge inequality on the measle vaccination coverage and measles related mortality over the world. This descriptive analysis aims to visually depict this inequality, offering the audience a fundamental understanding of the impact of measles vaccination. To effectively address the aforementioned question, I propose dividing it into two distinct parts.
+
+1\. **Global Analysis of Measles Mortality and Vaccination Coverage:**
+
+-   What is the current status of measles incidence rates worldwide?
+
+-   How does vaccination coverage vary across continents?
+
+2\. **Country-Specific Examination:**
+
+-   What is the prevalence and impact of measles in India, Nigeria, China, and the United States?
+
+-   How do vaccination coverage and mortality rates differ among these selected countries?
+
+## Audience
+
+Health officials, policymakers, and practitioners seeking insights into measles trends, vaccination coverage, and mortality rates to inform public health strategies.
+
+## Data Analysis
+
+### Data download
+
+This data is acquired from World Health Organization, which is publicly available and can be downloaded [here](https://immunizationdata.who.int/listing.html?topic=&location=).
+
+::: callout-warning
+This data contains xls file which needs to be converted into csv.
+:::
+
+### Question1: **Global Analysis of Measles Mortality and Vaccination Coverage**
+
+To answer question1, I first clean the measles incidence data and connect it with geological location database. Subsequently, I generated two visual representations: one illustrating the distribution of measles in individual countries for the year 2022, and the other depicting the global measles trend from 1980 to 2022. This approach enables us to visually grasp the present status of measles incidence on a global scale.
+
+```{r}
+library(leaflet)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(htmltools)
+```
+
+```{r}
+measles_data <- read.csv("Measle_incidence.csv")
+geo_location <- read.csv("geo_location.csv")
+measles_data <- measles_data %>% mutate_all(na_if, "")
+measles_data <- left_join(measles_data, geo_location, by = c("Country" = "name"))
+head(measles_data)
+```
+
+```{r}
+map <- leaflet(data = measles_data) %>%
+  addTiles() %>%
+  addMarkers(
+    ~longitude, ~latitude,
+    popup = ~paste("Country: ", Country, "<br>Measles Incidence Rate (2022): ", X2022)
+  ) 
+
+title_html <- tags$h2("World Measles Incidence Rates in 2022")
+
+Output_map <- tagList(title_html, map)
+
+print(Output_map)
+```
+
+::: callout-warning
+This graph is empower by Online Street Map and strangely doesn't shown in the quarto web page. I will provide some sample illustration of its output beliw
+:::
+
+![](illustration1.jpg)
+
+![](2.jpg)
+
+```{r}
+measles_data <- measles_data %>%
+  rename_at(vars(starts_with("x")), ~substr(., 2, nchar(.)))
+```
+
+```{r}
+#| column: margin
+global_row <- subset(measles_data, Country == 'Global')
+global_row_long <- tidyr::gather(global_row, key = "Year", value = "Incidence_Rate", -Country, -Disease)
+global_row_long$Year <- as.integer(global_row_long$Year)
+global_row_long$Incidence_Rate <- as.integer(gsub(",", "", global_row_long$Incidence_Rate))
+
+options(scipen = 999)
+
+global_row_long <- na.omit(global_row_long)
+ggplot(global_row_long, aes(x = Year, y = Incidence_Rate, group=1)) +
+  geom_line(color = "darkgreen", size = 1.5) +
+  labs(title = 'Global Measles Incidence 1980-2022',
+       x = 'Year',
+       y = 'Global Incidence Rate',
+       caption = "Ziying") + 
+  theme_grey() + 
+  theme(plot.title = element_text(hjust = 0.5, face = "bold")) 
+  
+  
+```
+
+Now, we want to see the vaccination coverage trend of the world during 1980-2022.
+
+```{r}
+vaccination <- read.csv("measle_vaccination.csv")
+vaccination_t <- vaccination %>%
+  filter(COVERAGE_CATEGORY == "WUENIC", YEAR %in% c(1980, 1990, 2000, 2010, 2020)) %>%
+  select(NAME, YEAR, X1_COVERAGE, X2_COVERAGE)
+```
+
+```{r}
+summary_data <- vaccination_t %>%
+  group_by(YEAR) %>%
+  summarize(
+    avg_X1_COVERAGE = mean(X1_COVERAGE, na.rm = TRUE),
+    min_X1_COVERAGE = min(X1_COVERAGE, na.rm = TRUE),
+    max_X1_COVERAGE = max(X1_COVERAGE, na.rm = TRUE),
+    avg_X2_COVERAGE = mean(X2_COVERAGE, na.rm = TRUE),
+    min_X2_COVERAGE = min(X2_COVERAGE, na.rm = TRUE),
+    max_X2_COVERAGE = max(X2_COVERAGE, na.rm = TRUE)
+  )
+
+plot_X1 <- ggplot(summary_data, aes(x = YEAR, y = avg_X1_COVERAGE)) +
+  geom_point(size=2) +
+  geom_line(color = "lightblue", size = 1) +
+  geom_errorbar(
+    aes(ymin = min_X1_COVERAGE, ymax = max_X1_COVERAGE)) +
+  labs(
+    x = "Year",
+    y = "X1_COVERAGE",
+    title = "Average X1_COVERAGE Over Years with Error Bars",
+    caption = "Ziying"
+  )  +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size=7),
+        axis.title.x = element_text(size = 7, face="bold"),
+        axis.title.y = element_text(size = 7, face="bold"),  
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),
+        plot.margin = margin(0.8, 0.8, 0.8, 0.8, "cm"))
+
+
+
+# Create a line plot for X2_COVERAGE
+plot_X2 <- ggplot(summary_data, aes(x = YEAR, y = avg_X2_COVERAGE)) +
+  geom_point(size=2) +
+  geom_line(color = "lightpink", size = 1) +
+  geom_errorbar(
+    aes(ymin = min_X2_COVERAGE, ymax = max_X2_COVERAGE)) +
+  labs(
+    x = "Year",
+    y = "X2_COVERAGE",
+    title = "Average X2_COVERAGE Over Years with Error Bars",
+    caption = "Ziying"
+  ) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size=7),
+        axis.title.x = element_text(size = 7, face="bold"),
+        axis.title.y = element_text(size = 7, face="bold"),  
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),
+        plot.margin = margin(0.8, 0.8, 0.8, 0.8, "cm")) 
+
+# Show the plots side by side
+library(gridExtra)
+grid.arrange(plot_X1, plot_X2, ncol = 2)
+
+```
+
+### Question2: Country specific examination
+
+In this graph, I will use four countries India, Nigeria, China, and the United States as an example, to show the prevalence and impact of measles in India, Nigeria, China, and the United States. I will also connect the incidence database to the vaccination coverage database to show the relationship between Measles incidence and Measles vaccination in those countries.
+
+```{r}
+selected_countries <- c('India', 'Nigeria', 'China', 'United States')
+Measles_selected <- measles_data %>%
+  filter(Country %in% selected_countries)
+selected_long <- tidyr::gather(Measles_selected, key = "Year", value = "Incidence_Rate", -Country, -Disease)
+selected_long$Incidence_Rate <- as.integer(gsub(",", "", selected_long$Incidence_Rate))
+selected_long$Year <- as.integer(selected_long$Year)
+```
+
+```{r}
+selected_long %>%
+  ggplot(aes(x = Year, y = Incidence_Rate, group=1)) +
+  geom_line() +
+  facet_wrap(vars(Country), scales = "free", ncol = 2) +
+  labs(title = "Measles Incidence by different country 1980-2022",
+       x = "Year", y = "Measles Incidence",
+       caption = "Ziying") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+```
+
+From the graph above, there is a substantial decline in measles incidence in China between 1980 and 1990. Now, we can specifically investigate the Measles vaccination coverage of China during this period.
+
+```{r}
+china_vaccination <- vaccination %>%
+  filter(NAME == "China", COVERAGE_CATEGORY == "WUENIC", between(YEAR, 1983, 1993)) %>%
+  select(NAME, YEAR, X1_COVERAGE, X2_COVERAGE)
+china_selected <- selected_long %>%
+  filter(Country == "China", between(Year, 1983, 1993))
+china_selected <- left_join(china_selected, china_vaccination, by = c("Year" = "YEAR"))
+```
+
+```{r}
+china_selected %>%
+  ggplot() +
+  geom_bar(aes(x = Year, y = Incidence_Rate), stat = "identity", fill = "lightblue", alpha = 0.5) +
+  geom_line(aes(x = Year, y = X1_COVERAGE*5000), color = "darkgreen", size = 1.5)  + 
+  labs(
+  x = "Year",
+  y = "Measles Incidence",
+  title = "Incidence and First Vaccination Coverage in China 1983-1993",
+  caption = "Ziying"
+) +
+  scale_y_continuous(sec.axis = sec_axis(~.*0.000001, name="Vaccniation Coverage", labels = scales::percent)) +
+  theme_gray() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
+
+```
+
+## Conclusions
 
 ## References
