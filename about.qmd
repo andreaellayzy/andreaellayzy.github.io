@@ -1,0 +1,23 @@
+---
+title: "About"
+---
+
+## Education
+
+**Sc.M. in Biostatistics** \| Johns Hopkins Bloomberg School of Public Health *(current)*
+
+**B.S. in Data Science and B.A. in Social Science** \| New York University Shanghai \| August 2019 - May 2023
+
+## Experience
+
+[**Clinton Health Access Initiative**](https://www.clintonhealthaccess.org/) \| Research Department Intern \| Sep - Mar 2023
+
+-   **Pediatric Cancer Health Access Program:** Based on pediatric cancer diagnosis data from Hainan Health Commission, I visualized the spatial distribution of brain tumors, leukemia and lymphoma patients and tertiary care hospital. I also conducted cluster analysis on the three pediatric cancers, pinpointing regions with high prevalence of each pediatric cancer.
+
+[**Center For Applied Social and Economic Research**](https://caser.shanghai.nyu.edu/) \| Researcher \| June - Sep 2022
+
+-   **Participated in SEEDS project on Early Childhood Development:** I researched policies related to maternity leave in China, analyzing policy differences across regions and time. I also reviewed and distributed Early Childhood Development questionnaire to 2000+ 3-6 year- old children from 50+ kindergartens over Shanghai, collecting data regarding child and maternal health status.
+
+## Interests
+
+I love travelling and urban exploration. I am also a part-time photographer.
