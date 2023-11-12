@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "Project1_Ziying"
+  title: "Stats_Paradigm_Project1_Ziying"
   navbar:
     left:
       - href: index.qmd
