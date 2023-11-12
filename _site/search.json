@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ziying Yang",
+    "section": "",
+    "text": "Ziying is a photographer, traveler, and an incoming Data Scientist. She is a Manchurian from Anshan, Northeast China. She also lived in Shanghai, New York, and Berlin before. Currently she is living in Baltimore.\nShe is a first-year ScM Biostatistics student at Johns Hopkins School of Public Health. In 2023, she graduated from New York University with a bachelor in Social Science (Sociology) and a Bachelor in Data Science (Finance)."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About me",
+    "section": "",
+    "text": "Johns Hopkins School of Public Health \\| Baltimore, MD\nScM in Biostatistics \\| August 2023 - May 2025\nNew York University Shanghai \\| Shanghai, China\nB.S. in Data Science and B.A. in Social Science \\| August 2019 - May 2023"
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Ziying Yang",
+    "section": "",
+    "text": "Ziying is a photographer, traveler, and an incoming Data Scientist. She is a Manchurian from Anshan, Northeast China. She also lived in Shanghai, New York, and Berlin before. Currently she is living in Baltimore.\nShe is a first-year ScM Biostatistics student at Johns Hopkins School of Public Health. In 2023, she graduated from New York University with a bachelor in Social Science (Sociology) and a Bachelor in Data Science (Finance)."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About me",
+    "section": "",
+    "text": "Johns Hopkins School of Public Health \\| Baltimore, MD\nScM in Biostatistics \\| August 2023 - May 2025\nNew York University Shanghai \\| Shanghai, China\nB.S. in Data Science and B.A. in Social Science \\| August 2019 - May 2023"
+  },
+  {
+    "objectID": "Analysis.html",
+    "href": "Analysis.html",
+    "title": "analysis",
+    "section": "",
+    "text": "library(\"tidyverse\")\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.3     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nif (!require(\"tidytuesdayR\", quietly = TRUE)) {\n    install.packages(\"tidytuesdayR\")\n}\n\n\ntuesdata &lt;- tidytuesdayR::tt_load(\"2022-01-18\")\n\n--- Compiling #TidyTuesday Information for 2022-01-18 ----\n\n\n--- There is 1 file available ---\n\n\n--- Starting Download ---\n\n\n\n    Downloading file 1 of 1: `chocolate.csv`\n\n\n--- Download complete ---\n\nchocolate &lt;- tuesdata$chocolate\n\n\nlibrary(\"here\")\n\nhere() starts at /Users/ziying/Desktop/Stats Paradigm/Project1_Ziying\n\nlibrary(\"tidyverse\")\n\n# tests if a directory named \"data\" exists locally\nif (!dir.exists(here(\"data\"))) {\n    dir.create(here(\"data\"))\n}\n\n# saves data only once (not each time you knit a R Markdown)\nif (!file.exists(here(\"data\", \"chocolate.RDS\"))) {\n    url_csv &lt;- \"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-18/chocolate.csv\"\n    chocolate &lt;- readr::read_csv(url_csv)\n\n    # save the file to RDS objects\n    saveRDS(chocolate, file = here(\"data\", \"chocolate.RDS\"))\n}\n\n\nchocolate &lt;- readRDS(here(\"data\", \"chocolate.RDS\"))\nas_tibble(chocolate)\n\n# A tibble: 2,530 × 10\n     ref company_manufacturer company_location review_date\n   &lt;dbl&gt; &lt;chr&gt;                &lt;chr&gt;                  &lt;dbl&gt;\n 1  2454 5150                 U.S.A.                  2019\n 2  2458 5150                 U.S.A.                  2019\n 3  2454 5150                 U.S.A.                  2019\n 4  2542 5150                 U.S.A.                  2021\n 5  2546 5150                 U.S.A.                  2021\n 6  2546 5150                 U.S.A.                  2021\n 7  2542 5150                 U.S.A.                  2021\n 8   797 A. Morin             France                  2012\n 9   797 A. Morin             France                  2012\n10  1011 A. Morin             France                  2013\n# ℹ 2,520 more rows\n# ℹ 6 more variables: country_of_bean_origin &lt;chr&gt;,\n#   specific_bean_origin_or_bar_name &lt;chr&gt;, cocoa_percent &lt;chr&gt;,\n#   ingredients &lt;chr&gt;, most_memorable_characteristics &lt;chr&gt;, rating &lt;dbl&gt;\n\n\n\nglimpse(chocolate)\n\nRows: 2,530\nColumns: 10\n$ ref                              &lt;dbl&gt; 2454, 2458, 2454, 2542, 2546, 2546, 2…\n$ company_manufacturer             &lt;chr&gt; \"5150\", \"5150\", \"5150\", \"5150\", \"5150…\n$ company_location                 &lt;chr&gt; \"U.S.A.\", \"U.S.A.\", \"U.S.A.\", \"U.S.A.…\n$ review_date                      &lt;dbl&gt; 2019, 2019, 2019, 2021, 2021, 2021, 2…\n$ country_of_bean_origin           &lt;chr&gt; \"Tanzania\", \"Dominican Republic\", \"Ma…\n$ specific_bean_origin_or_bar_name &lt;chr&gt; \"Kokoa Kamili, batch 1\", \"Zorzal, bat…\n$ cocoa_percent                    &lt;chr&gt; \"76%\", \"76%\", \"76%\", \"68%\", \"72%\", \"8…\n$ ingredients                      &lt;chr&gt; \"3- B,S,C\", \"3- B,S,C\", \"3- B,S,C\", \"…\n$ most_memorable_characteristics   &lt;chr&gt; \"rich cocoa, fatty, bready\", \"cocoa, …\n$ rating                           &lt;dbl&gt; 3.25, 3.50, 3.75, 3.00, 3.00, 3.25, 3…"
+  }
+]

@@ -1,0 +1,22 @@
+---
+title: "Ziying Yang"
+image: Ziying.jpg
+toc: false
+about: 
+  template: trestles
+  image-shape: round
+  image-width: 20em
+  links:
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/ella-ziying-yang/
+    - text: GitHub
+      href: https://github.com/andreaellayzy
+    - text: Email
+      href: mailto:ziyingyang76@gmail.com
+---
+
+## Welcome
+
+Ziying is a photographer, traveler, and an incoming Data Scientist. She is a Manchurian from Anshan, Northeast China. She also lived in Shanghai, New York, and Berlin before. Currently she is living in Baltimore.
+
+She is a first-year ScM Biostatistics student at Johns Hopkins School of Public Health. In 2023, she graduated from New York University with a bachelor in Social Science (Sociology) and a Bachelor in Data Science (Finance).
