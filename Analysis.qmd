@@ -86,7 +86,7 @@ print(Output_map)
 ```
 
 ::: callout-warning
-This graph is empower by Online Street Map and strangely doesn't shown in the quarto web page. I will provide some sample illustration of its output beliw
+This graph is empower by Online Street Map and strangely doesn't shown in the quarto web page. I will provide some sample illustration of its output below
 :::
 
 ![](illustration1.jpg)
@@ -149,7 +149,7 @@ plot_X1 <- ggplot(summary_data, aes(x = YEAR, y = avg_X1_COVERAGE)) +
   labs(
     x = "Year",
     y = "X1_COVERAGE",
-    title = "Average X1_COVERAGE Over Years with Error Bars",
+    title = "Average 1-st Dose Over Years with Error Bars",
     caption = "Ziying"
   )  +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size=7),
@@ -169,7 +169,7 @@ plot_X2 <- ggplot(summary_data, aes(x = YEAR, y = avg_X2_COVERAGE)) +
   labs(
     x = "Year",
     y = "X2_COVERAGE",
-    title = "Average X2_COVERAGE Over Years with Error Bars",
+    title = "Average 2-nd Dose Coverage Over Years with Error Bars",
     caption = "Ziying"
   ) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size=7),
@@ -184,7 +184,7 @@ grid.arrange(plot_X1, plot_X2, ncol = 2)
 
 ```
 
-### Question2: Country specific examination
+### Question2: **Country-Specific Examination**
 
 In this graph, I will use four countries India, Nigeria, China, and the United States as an example, to show the prevalence and impact of measles in India, Nigeria, China, and the United States. I will also connect the incidence database to the vaccination coverage database to show the relationship between Measles incidence and Measles vaccination in those countries.
 
@@ -239,5 +239,17 @@ china_selected %>%
 ```
 
 ## Conclusions
+
+This study shows that improvement made in public health efforts have effectively diminished the incidence of measles; nonetheless, pronounced international disparities still persist in both measles occurrence and vaccination coverage on a global scale. Measles exhibits a discernible seasonality, and its outbreak is influenced by multifaceted factors.
+
+Furthermore, an analysis of vaccine coverage trends reveals a limited advancement, particularly concerning the administration of the second dose. It is imperative for public health scientists to prioritize efforts towards accentuating the critical significance of measles vaccination, with a particular emphasis on the administration of the second dose, underscoring the need for sustained advocacy and intervention in this domain.
+
+## Functions Used
+
+**dplyr**: `left_join`, `select`, `summarize`, `filter`, `mutate`, `group_by`
+
+**tidyr**: `gather`
+
+**ggplot2 geom\_**: `geom_point`, `geom_bar`, `geom_line`, `geom_error_bar`, `facet_wrap`
 
 ## References
